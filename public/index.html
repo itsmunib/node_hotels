@@ -76,7 +76,6 @@
         // To-Do Slider Logic
         fetch("/tasks")
         .then(response => response.json())
-        .then(response => response.json())
             .then(tasks => {
                 const taskList = document.getElementById("task-list");
                 tasks.forEach((task, index) => {
