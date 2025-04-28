@@ -1,0 +1,290 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fad0c4, #a1c4fd, #c2e9fb);
+    min-height: 100vh;
+    padding: 20px;
+    color: #333;
+}
+
+.app-wrapper {
+    max-width: 1000px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 20px;
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.app-header {
+    background: linear-gradient(90deg, #ff6b6b, #ffb88c);
+    padding: 20px;
+    text-align: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.logo i {
+    font-size: 32px;
+    color: #fff;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.logo h1 {
+    font-size: 28px;
+    font-weight: 600;
+    color: #fff;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.app-content {
+    padding: 30px;
+}
+
+/* To-Do Section */
+.todo-section {
+    margin-bottom: 40px;
+}
+
+.task-input {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.task-input input[type="text"] {
+    flex: 1;
+    padding: 14px;
+    font-size: 16px;
+    border: none;
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    outline: none;
+    transition: transform 0.2s ease;
+}
+
+.task-input input[type="text"]:focus {
+    transform: scale(1.02);
+}
+
+.task-input button {
+    background: #4ecdc4;
+    border: none;
+    padding: 14px 20px;
+    border-radius: 12px;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.task-input button:hover {
+    background: #45b7d1;
+    transform: scale(1.05);
+}
+
+.task-slider {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.slider-container {
+    flex: 1;
+    overflow-x: hidden;
+    scrollbar-width: none;
+}
+
+.slider-container::-webkit-scrollbar {
+    display: none;
+}
+
+#task-list {
+    display: flex;
+    gap: 20px;
+    padding: 10px 0;
+}
+
+.task-card {
+    min-width: 200px;
+    padding: 20px;
+    background: linear-gradient(135deg, #f6d365, #fda085);
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.3s ease;
+}
+
+.task-card:hover {
+    transform: translateY(-5px);
+}
+
+.task-card span {
+    font-size: 16px;
+    font-weight: 500;
+    color: #fff;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.completed {
+    background: linear-gradient(135deg, #d3d3d3, #a9a9a9);
+}
+
+.completed span {
+    text-decoration: line-through;
+    color: #fff;
+}
+
+.task-action {
+    margin-top: 10px;
+    text-align: right;
+}
+
+.complete-btn {
+    background: #ff6b6b;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.complete-btn:hover {
+    background: #e65b50;
+}
+
+.complete-btn:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+.slider-btn {
+    background: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 50%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    font-size: 18px;
+    color: #ff6b6b;
+    transition: transform 0.2s ease;
+}
+
+.slider-btn:hover {
+    transform: scale(1.1);
+}
+
+/* Calculator Section */
+.calculator-section {
+    background: linear-gradient(135deg, #a1c4fd, #c2e9fb);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+.calculator-section h2 {
+    font-size: 24px;
+    font-weight: 600;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 20px;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.calculator {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+#display {
+    width: 100%;
+    padding: 20px;
+    font-size: 24px;
+    text-align: right;
+    border: none;
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+.calc-btn {
+    padding: 20px;
+    font-size: 18px;
+    font-weight: 600;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    color: #fff;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, background 0.3s ease;
+}
+
+.calc-btn:hover {
+    background: linear-gradient(135deg, #ff7b7b, #f4a8b9);
+    transform: scale(1.05);
+}
+
+.calc-btn:active {
+    transform: scale(0.95);
+}
+
+/* Special buttons */
+.calc-btn:nth-child(1) { /* Clear */
+    background: linear-gradient(135deg, #ff6b6b, #ffb88c);
+}
+
+.calc-btn:nth-child(2) { /* Delete */
+    background: linear-gradient(135deg, #ff6b6b, #ffb88c);
+}
+
+.calc-btn:nth-child(16) { /* Equals */
+    background: linear-gradient(135deg, #4ecdc4, #45b7d1);
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .task-card {
+        min-width: 150px;
+    }
+
+    .task-input {
+        flex-direction: column;
+    }
+
+    .task-input button {
+        width: 100%;
+    }
+
+    .calculator {
+        max-width: 100%;
+    }
+
+    .calc-btn {
+        padding: 15px;
+        font-size: 16px;
+    }
+}

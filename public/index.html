@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Munib's To-Do Slider & Calculator</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="app-wrapper">
+        <header class="app-header">
+            <div class="logo">
+                <i class="fas fa-rainbow"></i>
+                <h1>Munib's To-Do Slider & Calculator</h1>
+            </div>
+        </header>
+        <main class="app-content">
+            <!-- To-Do Section -->
+            <section class="todo-section">
+                <form action="/add-task" method="POST" class="task-input">
+                    <input type="text" name="task" placeholder="Add a colorful task..." required>
+                    <button type="submit"><i class="fas fa-plus"></i></button>
+                </form>
+                <div class="task-slider">
+                    <button class="slider-btn prev"><i class="fas fa-chevron-left"></i></button>
+                    <div class="slider-container">
+                        <ul id="task-list"></ul>
+                    </div>
+                    <button class="slider-btn next"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </section>
+
+            <!-- Calculator Section -->
+            <section class="calculator-section">
+                <h2>Calculator</h2>
+                <div class="calculator">
+                    <input type="text" id="display" readonly>
+                    <div class="buttons">
+                        <button class="calc-btn" onclick="clearDisplay()">C</button>
+                        <button class="calc-btn" onclick="deleteLast()">⌫</button>
+                        <button class="calc-btn" onclick="appendToDisplay('/')">/</button>
+                        <button class="calc-btn" onclick="appendToDisplay('*')">×</button>
+                        <button class="calc-btn" onclick="appendToDisplay('7')">7</button>
+                        <button class="calc-btn" onclick="appendToDisplay('8')">8</button>
+                        <button class="calc-btn" onclick="appendToDisplay('9')">9</button>
+                        <button class="calc-btn" onclick="appendToDisplay('-')">-</button>
+                        <button class="calc-btn" onclick="appendToDisplay('4')">4</button>
+                        <button class="calc-btn" onclick="appendToDisplay('5')">5</button>
+                        <button class="calc-btn" onclick="appendToDisplay('6')">6</button>
+                        <button class="calc-btn" onclick="appendToDisplay('+')">+</button>
+                        <button class="calc-btn" onclick="appendToDisplay('1')">1</button>
+                        <button class="calc-btn" onclick="appendToDisplay('2')">2</button>
+                        <button class="calc-btn" onclick="appendToDisplay('3')">3</button>
+                        <button class="calc-btn" onclick="calculate()">=</button>
+                        <button class="calc-btn" onclick="appendToDisplay('0')">0</button>
+                        <button class="calc-btn" onclick="appendToDisplay('.')">.</button>
+                        <button class="calc-btn" onclick="appendToDisplay('(')">(</button>
+                        <button class="calc-btn" onclick="appendToDisplay(')')">)</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        // To-Do Slider Logic
+        fetch("/tasks")
+            .then(response => response.json())
+            .then(tasks => {
+                const taskList = document.getElementById("task-list");
+                tasks.forEach((task, index) => {
+                    const li = document.createElement("li");
+                    li.innerHTML = `
+                        <div class="task-card ${task.done ? 'completed' : ''}">
+                            <span>${task.description}</span>
+                            <form action="/mark-done" method="POST" class="task-action">
+                                <input type="hidden" name="index" value="${index}">
+                                <button type="submit" class="complete-btn" ${task.done ? 'disabled' : ''}>
+                                    <i class="fas fa-check"></i>
+                                </button>
+                            </form>
+                        </div>
+                    `;
+                    taskList.appendChild(li);
+                });
+            });
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const slider = document.querySelector(".slider-container");
+            const prevBtn = document.querySelector(".prev");
+            const nextBtn = document.querySelector(".next");
+            const cardWidth = 220;
+
+            prevBtn.addEventListener("click", () => {
+                slider.scrollBy({ left: -cardWidth, behavior: "smooth" });
+            });
+
+            nextBtn.addEventListener("click", () => {
+                slider.scrollBy({ left: cardWidth, behavior: "smooth" });
+            });
+        });
+
+        // Calculator Logic
+        function appendToDisplay(value) {
+            document.getElementById("display").value += value;
+        }
+
+        function clearDisplay() {
+            document.getElementById("display").value = "";
+        }
+
+        function deleteLast() {
+            const display = document.getElementById("display");
+            display.value = display.value.slice(0, -1);
+        }
+
+        function calculate() {
+            const display = document.getElementById("display");
+            try {
+                display.value = eval(display.value);
+            } catch (error) {
+                display.value = "Error";
+                setTimeout(clearDisplay, 1000);
+            }
+        }
+    </script>
+</body>
+</html>
